@@ -478,12 +478,12 @@ class PDQ_ST7735 : public PDQ_GFX<PDQ_ST7735>
 		for(uint8_t bit = 0x80; bit; bit >>= 1)
 		{
 			if (data & bit)
-				FastPin<ILI9341_MOSI_PIN>::hi();
+				FastPin<ST7735_MOSI_PIN>::hi();
 			else
-				FastPin<ILI9341_MOSI_PIN>::lo();
+				FastPin<ST7735_MOSI_PIN>::lo();
 
-			FastPin<ILI9341_SCLK_PIN>::hi();
-			FastPin<ILI9341_SCLK_PIN>::lo();
+			FastPin<ST7735_SCLK_PIN>::hi();
+			FastPin<ST7735_SCLK_PIN>::lo();
 		}
 	}
 	static void spiWrite16(uint16_t data) __attribute__((noinline))
@@ -655,7 +655,7 @@ void PDQ_ST7735::begin()
 	#if defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
 		USICR = (0<<USISIE)|(0<<USIOIE)|(0<<USIWM1)|(1<<USIWM0)|(0<<USICS1)|(1<<USICS0)|(1<<USICLK)|(0<<USITC);
 	#endif
-	#if defined (ILI9341_MISO_PIN)
+	#if defined (ST7735_MISO_PIN)
 		FastPin<ST7735_MISO_PIN>::setInput();
 	#endif
 	FastPin<ST7735_MOSI_PIN>::setOutput();
